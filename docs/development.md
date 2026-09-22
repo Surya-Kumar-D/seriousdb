@@ -85,6 +85,30 @@ uv run ruff format --check .
 ruff format --check .
 ```
 
+## Markdown formatting
+
+Markdown files are formatted with [`mdformat`](https://github.com/hukkin/mdformat)
+(GFM tables and task lists via
+[`mdformat-gfm`](https://github.com/hukkin/mdformat-gfm)).
+Both are pinned in the `dev` dependency group because the formatting style may
+change between versions.
+
+### Format Markdown files with `mdformat`:
+
+#### uv
+
+```bash
+uv run --locked mdformat .
+```
+
+### To check formatting without changing files:
+
+#### uv
+
+```bash
+uv run --locked mdformat --check .
+```
+
 ## Linting
 
 ### Lint python files with `ruff`:

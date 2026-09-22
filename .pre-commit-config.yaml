@@ -48,3 +48,10 @@ repos:
         pass_filenames: false
         always_run: true
         stages: [pre-commit]
+
+      - id: uv-mdformat
+        name: mdformat
+        entry: uv run --locked mdformat --check
+        language: system
+        types: [markdown]
+        stages: [pre-commit]
