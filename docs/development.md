@@ -95,18 +95,34 @@ change between versions.
 
 ### Format Markdown files with `mdformat`:
 
-#### uv
+Tracked Markdown files only (`git ls-files` skips ignored files such as
+`.pytest_cache/README.md`, which a bare `mdformat .` would pick up after a
+test run):
+
+#### uv (bash)
 
 ```bash
-uv run --locked mdformat .
+uv run --locked mdformat $(git ls-files '*.md')
+```
+
+#### uv (PowerShell)
+
+```powershell
+uv run --locked mdformat (git ls-files '*.md')
 ```
 
 ### To check formatting without changing files:
 
-#### uv
+#### uv (bash)
 
 ```bash
-uv run --locked mdformat --check .
+uv run --locked mdformat --check $(git ls-files '*.md')
+```
+
+#### uv (PowerShell)
+
+```powershell
+uv run --locked mdformat --check (git ls-files '*.md')
 ```
 
 ## Linting
