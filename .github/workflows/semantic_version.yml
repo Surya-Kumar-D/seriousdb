@@ -1,0 +1,92 @@
+name: Update VERSION
+
+on:
+  pull_request:
+    types:
+      - closed
+
+permissions:
+  contents: write
+
+jobs:
+  update-version:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine version bump
+        id: version
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          CURRENT_VERSION=$(tr -d '[:space:]' < VERSION)
+
+          if [[ ! "$CURRENT_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Invalid VERSION: $CURRENT_VERSION"
+            exit 1
+          fi
+
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT_VERSION"
+
+          echo "Current version: $CURRENT_VERSION"
+          echo "PR title: $PR_TITLE"
+
+          # Extract the Conventional Commit type.
+          TYPE="${PR_TITLE%%:*}"
+          TYPE="${TYPE%%(*}"
+          TYPE="${TYPE%%!*}"
+
+          # Detect breaking change marker.
+          if [[ "$PR_TITLE" == *"!:"* ]]; then
+            MAJOR=$((MAJOR + 1))
+            MINOR=0
+            PATCH=0
+
+          elif [[ "$TYPE" == "feat" ]]; then
+            MINOR=$((MINOR + 1))
+            PATCH=0
+
+          elif [[ "$TYPE" == "fix" || "$TYPE" == "perf" ]]; then
+            PATCH=$((PATCH + 1))
+
+          else
+            echo "PR does not require a version bump."
+            exit 0
+          fi
+
+          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+
+          echo "New version: $NEW_VERSION"
+          echo "version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Update VERSION
+        if: steps.version.outputs.version != ''
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+
+          printf '%s\n' "$VERSION" > VERSION
+
+          echo "VERSION updated to $VERSION"
+
+      - name: Commit VERSION
+        if: steps.version.outputs.version != ''
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add VERSION
+
+          if git diff --cached --quiet; then
+            echo "VERSION is already $VERSION"
+            exit 0
+          fi
+
+          git commit -m "chore: bump version to $VERSION"
+          git push origin HEAD:${{ github.event.pull_request.base.ref }}
