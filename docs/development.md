@@ -113,6 +113,12 @@ uv run --locked mdformat $(git ls-files '*.md' ':!docs/reference/**')
 uv run --locked mdformat (git ls-files '*.md' ':!docs/reference/**')
 ```
 
+### Nix (in Nix Shell)
+
+```bash
+mdformat $(git ls-files '*.md' ':!docs/reference/**')
+```
+
 ### To check formatting without changing files:
 
 #### uv (bash)
@@ -125,6 +131,12 @@ uv run --locked mdformat --check $(git ls-files '*.md' ':!docs/reference/**')
 
 ```powershell
 uv run --locked mdformat --check (git ls-files '*.md' ':!docs/reference/**')
+```
+
+### Nix (in Nix Shell)
+
+```bash
+mdformat --check $(git ls-files '*.md' ':!docs/reference/**')
 ```
 
 ## Linting
