@@ -7,7 +7,7 @@
 [![Tests](https://github.com/danieldeer/seriousdb/actions/workflows/tests.yml/badge.svg)](https://github.com/danieldeer/seriousdb/actions/workflows/tests.yml)
 [![Lint](https://github.com/danieldeer/seriousdb/actions/workflows/lint.yml/badge.svg)](https://github.com/danieldeer/seriousdb/actions/workflows/lint.yml)
 [![Typecheck](https://github.com/danieldeer/seriousdb/actions/workflows/typecheck.yml/badge.svg)](https://github.com/danieldeer/seriousdb/actions/workflows/typecheck.yml)
-[![Version](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdanieldeer%2Fseriousdb%2Fmain%2FVERSION&search=(.%2B)&label=version)](https://github.com/danieldeer/seriousdb/blob/main/VERSION)
+[![Version](https://img.shields.io/pypi/v/seriousdb?label=version&color=blue)](https://pypi.org/project/seriousdb/)
 [![Python](https://img.shields.io/badge/python-3.11%2B-blue)](https://github.com/danieldeer/seriousdb)
 [![License](https://img.shields.io/github/license/danieldeer/seriousdb)](https://github.com/danieldeer/seriousdb/blob/main/LICENSE)
 [![Stars](https://img.shields.io/github/stars/danieldeer/seriousdb)](https://github.com/danieldeer/seriousdb/stargazers)
