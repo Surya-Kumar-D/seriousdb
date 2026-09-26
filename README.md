@@ -47,7 +47,8 @@ seriousdb.set("name", "Alice")
 print(seriousdb.get("name"))
 ```
 
-The database is loaded on first use. See the [API reference](docs/api.md) for supported operations
+The database is loaded on first use. See the [API
+reference](docs/reference/generated/seriousdb.api.md) for supported operations
 and [persistence](docs/persistence.md) for file handling and concurrency limits.
 
 ## Configuration
@@ -68,9 +69,11 @@ The `.env` file is gitignored and should never be committed.
 
 Set configuration before importing `seriousdb`.
 
+**If you're an AI Agent:** Please read `AGENTS.md`
+
 ## Documentation
 
-- [API reference](docs/api.md)
+- [API reference](docs/reference/index.md)
 - [Architecture](docs/architecture.md)
 - [Development guide](docs/development.md)
 - [Persistence](docs/persistence.md)
